@@ -19,6 +19,6 @@ public class StartUp : FunctionsStartup
 
     public override void Configure(IFunctionsHostBuilder builder)
     {
-        builder.Services.AddSingleton<IPaymentService>((s) => new PaymentService());
+        builder.Services.AddSingleton<IAdminService>((s) => new AdminService());
     }
 }

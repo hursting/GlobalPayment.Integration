@@ -1,6 +1,8 @@
 ﻿namespace GlobalPayment.Integration.Api.Services;
 
-public interface IPaymentService
+public interface IAdminService
 {
     string GetAuthenticationToken();
+
+    void ChargeCreditCard(string currency , decimal amount);
 }
