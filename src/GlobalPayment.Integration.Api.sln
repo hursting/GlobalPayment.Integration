@@ -1,8 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlobalPayment.Integration.Api", "GlobalPayment.Integration.Api\GlobalPayment.Integration.Api.csproj", "{A3BF7B7A-7D85-49B9-8D87-FD05C96F367B}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlobalPayment.Integration.Api", "GlobalPayment.Integration.Api\GlobalPayment.Integration.Api.csproj", "{A3BF7B7A-7D85-49B9-8D87-FD05C96F367B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlobalPayment.Integration.Api.Test", "GlobalPayment.Integration.Api.Test\GlobalPayment.Integration.Api.Test.csproj", "{1C31CB10-D83F-494D-BF6A-84B1322428F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlobalPayment.Integration.Api.Test", "GlobalPayment.Integration.Api.Test\GlobalPayment.Integration.Api.Test.csproj", "{1C31CB10-D83F-494D-BF6A-84B1322428F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +21,8 @@ Global
 		{1C31CB10-D83F-494D-BF6A-84B1322428F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C31CB10-D83F-494D-BF6A-84B1322428F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C31CB10-D83F-494D-BF6A-84B1322428F6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

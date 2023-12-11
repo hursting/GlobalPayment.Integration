@@ -32,24 +32,12 @@ public  class PaymentTrigger
 
     }
     
-    [FunctionName("GetAuthenticationToken")]
-    public async Task<IActionResult> GetAuthenticationToken(
-        [HttpTrigger(AuthorizationLevel.Function, "get",  Route = null)] HttpRequest req, ILogger log)
-    {
-        string token = _adminService.GetAuthenticationToken();
-       
-        log.LogInformation("The token has been acquired");
-
-        if (string.IsNullOrEmpty(token)) return new BadRequestObjectResult("Unable to Gather token at this time");
-
-        return (ActionResult) new OkObjectResult($"{token}");
-        
-    }
+   
     
     
     [FunctionName("PaymentTrigger")]
-    public async Task<IActionResult> Something(
-        [HttpTrigger(AuthorizationLevel.Function, "get",  Route = null)] HttpRequest req, ILogger log)
+    public async Task<IActionResult> MakePayment(
+        [HttpTrigger(AuthorizationLevel.Function, "get",  Route = "v1/makepayment")] HttpRequest req, ILogger log)
     {
         try
         {
