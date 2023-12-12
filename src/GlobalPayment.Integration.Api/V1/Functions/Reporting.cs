@@ -1,10 +1,15 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Ardalis.GuardClauses;
+using AutoMapper;
+using GlobalPayment.Integration.Api.V1.Models.dto;
 using GlobalPayments.Api;
+using GlobalPayments.Api.Entities;
+using GlobalPayments.Api.Entities.Reporting;
 using GlobalPayments.Api.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,12 +26,17 @@ namespace GlobalPayment.Integration.Api.V1.Functions
     public class Reporting
     {
         private readonly ILogger<Reporting> _logger;
+        private readonly IMapper _mapper;
 
-        public Reporting(ILogger<Reporting> logger)
+        public Reporting(ILogger<Reporting> logger, IMapper mapper)
         {
             _logger = logger;
 
+            _mapper = mapper;
+
             Guard.Against.Null(logger, nameof(logger));
+
+            Guard.Against.Null(mapper, nameof(mapper));
 
         }
 
@@ -38,8 +48,8 @@ namespace GlobalPayment.Integration.Api.V1.Functions
         {
             GpApiConfig _gpApiConfig = new GpApiConfig()
             {
-                AppId = Environment.GetEnvironmentVariable("AppId"),
-                AppKey = Environment.GetEnvironmentVariable("AppSecret"),
+                AppId = System.Environment.GetEnvironmentVariable("AppId"),
+                AppKey = System.Environment.GetEnvironmentVariable("AppSecret"),
             };
             ServicesContainer.ConfigureService(_gpApiConfig);
 
@@ -47,11 +57,9 @@ namespace GlobalPayment.Integration.Api.V1.Functions
 
             var merchantSummaryList = reportingService.FindMerchants(1, 100).Execute();
 
-            string responseMessage = merchantSummaryList.Results.Any()
-                ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
-                : $"Hello, crap. This HTTP triggered function executed successfully.";
+            List<MerchantSummaryDto> merchantSummaries = _mapper.Map<List<GlobalPayments.Api.Entities.Reporting.MerchantSummary>, List<MerchantSummaryDto>>(merchantSummaryList.Results);
 
-            return new OkObjectResult(responseMessage);
+            return new OkObjectResult(merchantSummaries);
         }
     }
 }

@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace GlobalPayment.Integration.Api.V1.Models.dto
 {
-    public class MerchantSummary
+    public class MerchantSummaryDto
     {
+        public string Id { get; set; }
+        public string Name { get; set; }
 
+        public string Status { get; set; }
     }
 }
