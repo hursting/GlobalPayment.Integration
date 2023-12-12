@@ -13,6 +13,7 @@ using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using GlobalPayment.Integration.Api.Services;
+using GlobalPayment.Integration.Api.V1.Functions;
 
 namespace GlobalPayment.Integration.Api;
 
@@ -30,14 +31,11 @@ public  class PaymentTrigger
 
         Guard.Against.Null(adminService, nameof(adminService));
 
-    }
-    
+    }    
    
-    
-    
-    [FunctionName("PaymentTrigger")]
-    public async Task<IActionResult> MakePayment(
-        [HttpTrigger(AuthorizationLevel.Function, "get",  Route = "v1/makepayment")] HttpRequest req, ILogger log)
+    [FunctionName(nameof(PaymentTrigger.ChargeCard))]
+    public async Task<IActionResult> ChargeCard(
+        [HttpTrigger(AuthorizationLevel.Function, "get",  Route = $"v1/chargeCard")] HttpRequest req, ILogger log)
     {
         try
         {
@@ -50,7 +48,22 @@ public  class PaymentTrigger
             return new BadRequestObjectResult("Unable to Gather token at this time");
         }
     }
-    
-    
-    
+
+
+    [FunctionName(nameof(PaymentTrigger.VerifyCard))]
+    public async Task<IActionResult> VerifyCard(
+        [HttpTrigger(AuthorizationLevel.Function, "get", Route = $"v1/verifycard")] HttpRequest req, ILogger log)
+    {
+        try
+        {
+            _adminService.VerifyCard();
+
+            return (ActionResult)new OkObjectResult("Success");
+        }
+        catch (Exception e)
+        {
+            return new BadRequestObjectResult("Unable to Gather token at this time");
+        }
+    }
+
 }

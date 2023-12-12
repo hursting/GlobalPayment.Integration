@@ -1,11 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
         <AzureFunctionsVersion>V4</AzureFunctionsVersion>
     </PropertyGroup>
-    <ItemGroup>
-      <Compile Remove="V1\Functions\PaymentTrigger.cs" />
-    </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Ardalis.GuardClauses" Version="4.2.0" />
         <PackageReference Include="GlobalPayments.Api" Version="7.0.3" />

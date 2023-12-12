@@ -5,4 +5,5 @@ public interface IAdminService
     string GetAuthenticationToken();
 
     void ChargeCreditCard(string currency , decimal amount);
+    void VerifyCard();
 }
